@@ -1,165 +1,80 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Bank Sampah Sekolah</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            background: #e8f5e9;
-            margin: 0;
-            padding: 20px;
-        }
+export default function BankSampahSekolah() { const dataSampah = [ { jenis: "Botol Plastik", harga: "Rp2.000/kg" }, { jenis: "Kertas", harga: "Rp1.500/kg" }, { jenis: "Kardus", harga: "Rp2.500/kg" }, { jenis: "Minyak Jelantah", harga: "Rp5.000/liter" }, ];
 
-        h1 { color: #2e7d32; }
-        
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
+return ( <div className="min-h-screen bg-green-50 p-6 font-sans"> <div className="max-w-5xl mx-auto"> <div className="bg-white rounded-3xl shadow-lg p-8 mb-6"> <h1 className="text-4xl font-bold text-green-700 mb-2"> Bank Sampah Sekolah </h1> <p className="text-gray-600"> Aplikasi sederhana untuk pencatatan sampah sekolah. </p> </div>
 
-        .box {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 200px;
-            border-top: 5px solid #4caf50;
-        }
+<div className="grid md:grid-cols-3 gap-6 mb-6">
+      <div className="bg-white rounded-2xl shadow p-6">
+        <h2 className="text-xl font-semibold text-green-700 mb-2">
+          Total Nasabah
+        </h2>
+        <p className="text-3xl font-bold">125</p>
+      </div>
 
-        .category-icon { font-size: 40px; }
-        
-        .weight {
-            font-size: 35px;
-            font-weight: bold;
-            margin: 10px 0;
-            color: #333;
-        }
+      <div className="bg-white rounded-2xl shadow p-6">
+        <h2 className="text-xl font-semibold text-green-700 mb-2">
+          Sampah Terkumpul
+        </h2>
+        <p className="text-3xl font-bold">320 Kg</p>
+      </div>
 
-        .label { color: #666; margin-bottom: 10px; }
-
-        button {
-            font-size: 18px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #4caf50;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        button:hover { background: #45a049; }
-
-        .summary {
-            background: white;
-            margin: 30px auto;
-            padding: 20px;
-            max-width: 500px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .total-saldo {
-            font-size: 24px;
-            color: #2e7d32;
-            font-weight: bold;
-        }
-
-        .reset {
-            background: #f44336;
-            margin-top: 20px;
-        }
-
-        .reset:hover { background: #d32f2f; }
-    </style>
-</head>
-<body>
-
-    <h1>🌿 Bank Sampah Sekolah</h1>
-    <p>Mari menabung sambil menjaga lingkungan!</p>
-
-    <div class="container">
-        <div class="box">
-            <div class="category-icon">🥤</div>
-            <h3>Plastik</h3>
-            <div class="label">Rp 2.000 / kg</div>
-            <div class="weight"><span id="berat-plastik">0</span> kg</div>
-            <button onclick="tambahSampah('plastik', 1)">+ 1kg</button>
-        </div>
-
-        <div class="box">
-            <div class="category-icon">📄</div>
-            <h3>Kertas</h3>
-            <div class="label">Rp 1.500 / kg</div>
-            <div class="weight"><span id="berat-kertas">0</span> kg</div>
-            <button onclick="tambahSampah('kertas', 1)">+ 1kg</button>
-        </div>
-
-        <div class="box">
-            <div class="category-icon">🥫</div>
-            <h3>Logam</h3>
-            <div class="label">Rp 4.000 / kg</div>
-            <div class="weight"><span id="berat-logam">0</span> kg</div>
-            <button onclick="tambahSampah('logam', 1)">+ 1kg</button>
-        </div>
+      <div className="bg-white rounded-2xl shadow p-6">
+        <h2 className="text-xl font-semibold text-green-700 mb-2">
+          Saldo Terkumpul
+        </h2>
+        <p className="text-3xl font-bold">Rp1.250.000</p>
+      </div>
     </div>
 
-    <div class="summary">
-        <h2>Ringkasan Tabungan</h2>
-        <p>Total Berat: <strong><span id="total-berat">0</span> kg</strong></p>
-        <div class="total-saldo">Saldo: Rp <span id="total-harga">0</span></div>
-        <button class="reset" onclick="reset()">Reset Data</button>
+    <div className="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 className="text-2xl font-bold text-green-700 mb-4">
+        Daftar Harga Sampah
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-4">
+        {dataSampah.map((item, index) => (
+          <div
+            key={index}
+            className="border border-green-200 rounded-xl p-4"
+          >
+            <h3 className="font-semibold text-lg">{item.jenis}</h3>
+            <p className="text-gray-600">{item.harga}</p>
+          </div>
+        ))}
+      </div>
     </div>
 
-    <script>
-        // Data harga per kg
-        const harga = {
-            plastik: 2000,
-            kertas: 1500,
-            logam: 4000
-        };
+    <div className="bg-white rounded-2xl shadow p-6">
+      <h2 className="text-2xl font-bold text-green-700 mb-4">
+        Form Setor Sampah
+      </h2>
 
-        // State data
-        let data = {
-            plastik: 0,
-            kertas: 0,
-            logam: 0
-        };
+      <div className="grid gap-4">
+        <input
+          type="text"
+          placeholder="Nama Siswa"
+          className="border rounded-xl p-3"
+        />
 
-        function tambahSampah(jenis, jumlah) {
-            data[jenis] += jumlah;
-            document.getElementById(`berat-${jenis}`).innerText = data[jenis];
-            updateTotal();
-        }
+        <select className="border rounded-xl p-3">
+          <option>Pilih Jenis Sampah</option>
+          <option>Botol Plastik</option>
+          <option>Kertas</option>
+          <option>Kardus</option>
+          <option>Minyak Jelantah</option>
+        </select>
 
-        function updateTotal() {
-            const totalBerat = data.plastik + data.kertas + data.logam;
-            const totalHarga = (data.plastik * harga.plastik) + 
-                               (data.kertas * harga.kertas) + 
-                               (data.logam * harga.logam);
+        <input
+          type="number"
+          placeholder="Berat / Jumlah"
+          className="border rounded-xl p-3"
+        />
 
-            document.getElementById("total-berat").innerText = totalBerat;
-            document.getElementById("total-harga").innerText = totalHarga.toLocaleString('id-ID');
-        }
+        <button className="bg-green-600 hover:bg-green-700 text-white rounded-xl p-3 font-semibold transition">
+          Simpan Setoran
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        function reset() {
-            if(confirm("Apakah Anda yakin ingin menghapus semua catatan?")) {
-                data.plastik = 0;
-                data.kertas = 0;
-                data.logam = 0;
-                
-                document.getElementById("berat-plastik").innerText = 0;
-                document.getElementById("berat-kertas").innerText = 0;
-                document.getElementById("berat-logam").innerText = 0;
-                updateTotal();
-            }
-        }
-    </script>
-</body>
-</html>
+); }
