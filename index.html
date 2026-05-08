@@ -1,80 +1,154 @@
-export default function BankSampahSekolah() { const dataSampah = [ { jenis: "Botol Plastik", harga: "Rp2.000/kg" }, { jenis: "Kertas", harga: "Rp1.500/kg" }, { jenis: "Kardus", harga: "Rp2.500/kg" }, { jenis: "Minyak Jelantah", harga: "Rp5.000/liter" }, ];
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank Sampah Sekolah</title>
 
-return ( <div className="min-h-screen bg-green-50 p-6 font-sans"> <div className="max-w-5xl mx-auto"> <div className="bg-white rounded-3xl shadow-lg p-8 mb-6"> <h1 className="text-4xl font-bold text-green-700 mb-2"> Bank Sampah Sekolah </h1> <p className="text-gray-600"> Aplikasi sederhana untuk pencatatan sampah sekolah. </p> </div>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
 
-<div className="grid md:grid-cols-3 gap-6 mb-6">
-      <div className="bg-white rounded-2xl shadow p-6">
-        <h2 className="text-xl font-semibold text-green-700 mb-2">
-          Total Nasabah
-        </h2>
-        <p className="text-3xl font-bold">125</p>
-      </div>
+    body{
+      background:#22a35a;
+    }
 
-      <div className="bg-white rounded-2xl shadow p-6">
-        <h2 className="text-xl font-semibold text-green-700 mb-2">
-          Sampah Terkumpul
-        </h2>
-        <p className="text-3xl font-bold">320 Kg</p>
-      </div>
+    .app{
+      max-width:420px;
+      margin:auto;
+      min-height:100vh;
+      background:#f5f5f5;
+    }
 
-      <div className="bg-white rounded-2xl shadow p-6">
-        <h2 className="text-xl font-semibold text-green-700 mb-2">
-          Saldo Terkumpul
-        </h2>
-        <p className="text-3xl font-bold">Rp1.250.000</p>
-      </div>
-    </div>
+    .header{
+      background:#22a35a;
+      color:white;
+      padding:25px 20px;
+    }
 
-    <div className="bg-white rounded-2xl shadow p-6 mb-6">
-      <h2 className="text-2xl font-bold text-green-700 mb-4">
-        Daftar Harga Sampah
-      </h2>
+    .logo{
+      font-size:38px;
+      font-weight:bold;
+    }
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {dataSampah.map((item, index) => (
-          <div
-            key={index}
-            className="border border-green-200 rounded-xl p-4"
-          >
-            <h3 className="font-semibold text-lg">{item.jenis}</h3>
-            <p className="text-gray-600">{item.harga}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    .sub{
+      font-size:18px;
+      margin-top:5px;
+    }
 
-    <div className="bg-white rounded-2xl shadow p-6">
-      <h2 className="text-2xl font-bold text-green-700 mb-4">
-        Form Setor Sampah
-      </h2>
+    .card-user{
+      background:white;
+      margin:20px;
+      border-radius:20px;
+      padding:20px;
+      display:flex;
+      align-items:center;
+      gap:15px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
 
-      <div className="grid gap-4">
-        <input
-          type="text"
-          placeholder="Nama Siswa"
-          className="border rounded-xl p-3"
-        />
+    .avatar{
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      background:#dff5e8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:35px;
+    }
 
-        <select className="border rounded-xl p-3">
-          <option>Pilih Jenis Sampah</option>
-          <option>Botol Plastik</option>
-          <option>Kertas</option>
-          <option>Kardus</option>
-          <option>Minyak Jelantah</option>
-        </select>
+    .username{
+      font-size:30px;
+      font-weight:bold;
+    }
 
-        <input
-          type="number"
-          placeholder="Berat / Jumlah"
-          className="border rounded-xl p-3"
-        />
+    .desc{
+      color:gray;
+      margin-top:5px;
+    }
 
-        <button className="bg-green-600 hover:bg-green-700 text-white rounded-xl p-3 font-semibold transition">
-          Simpan Setoran
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+    .point-box{
+      background:white;
+      margin:20px;
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
 
-); }
+    .point-title{
+      font-size:28px;
+      font-weight:bold;
+    }
+
+    .point{
+      font-size:70px;
+      font-weight:bold;
+      margin:15px 0;
+    }
+
+    .btn{
+      background:#22a35a;
+      color:white;
+      border:none;
+      width:100%;
+      padding:15px;
+      border-radius:15px;
+      font-size:22px;
+      cursor:pointer;
+    }
+
+    .menu{
+      margin:20px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .menu-item{
+      background:white;
+      border-radius:20px;
+      padding:20px;
+      display:flex;
+      align-items:center;
+      gap:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .icon{
+      width:70px;
+      height:70px;
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:35px;
+      color:white;
+    }
+
+    .blue{
+      background:#4b8df8;
+    }
+
+    .red{
+      background:#e84d5b;
+    }
+
+    .orange{
+      background:#f4a340;
+    }
+
+    .menu-text h3{
+      font-size:28px;
+    }
+
+    .menu-text p{
+      color:gray;
+      margin-top:5px;
+    }
+
+    .navbar
