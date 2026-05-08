@@ -1,105 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Hitung Karung Paket</title>
-<style>
-body{
-    font-family: Arial;
-    text-align:center;
-    background:#f2f2f2;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Bank Sampah Sekolah</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: #e8f5e9;
+            margin: 0;
+            padding: 20px;
+        }
 
-.container{
-    display:flex;
-    justify-content:center;
-    gap:50px;
-    margin-top:50px;
-}
+        h1 { color: #2e7d32; }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-.box{
-    background:white;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 200px;
+            border-top: 5px solid #4caf50;
+        }
 
-.count{
-    font-size:40px;
-    margin:20px 0;
-}
+        .category-icon { font-size: 40px; }
+        
+        .weight {
+            font-size: 35px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #333;
+        }
 
-button{
-    font-size:30px;
-    padding:10px 25px;
-    border:none;
-    border-radius:10px;
-    background:#4CAF50;
-    color:white;
-}
+        .label { color: #666; margin-bottom: 10px; }
 
-.reset{
-    margin-top:40px;
-    background:red;
-    font-size:20px;
-}
-</style>
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #4caf50;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover { background: #45a049; }
+
+        .summary {
+            background: white;
+            margin: 30px auto;
+            padding: 20px;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .total-saldo {
+            font-size: 24px;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .reset {
+            background: #f44336;
+            margin-top: 20px;
+        }
+
+        .reset:hover { background: #d32f2f; }
+    </style>
 </head>
-
 <body>
 
-<h1>Hitung Karung Paket</h1>
+    <h1>🌿 Bank Sampah Sekolah</h1>
+    <p>Mari menabung sambil menjaga lingkungan!</p>
 
-<div class="container">
+    <div class="container">
+        <div class="box">
+            <div class="category-icon">🥤</div>
+            <h3>Plastik</h3>
+            <div class="label">Rp 2.000 / kg</div>
+            <div class="weight"><span id="berat-plastik">0</span> kg</div>
+            <button onclick="tambahSampah('plastik', 1)">+ 1kg</button>
+        </div>
 
-<div class="box">
-<h2>Luar</h2>
-<div class="count" id="kiri">0</div>
-<button onclick="tambahKiri()">+</button>
-</div>
+        <div class="box">
+            <div class="category-icon">📄</div>
+            <h3>Kertas</h3>
+            <div class="label">Rp 1.500 / kg</div>
+            <div class="weight"><span id="berat-kertas">0</span> kg</div>
+            <button onclick="tambahSampah('kertas', 1)">+ 1kg</button>
+        </div>
 
-<div class="box">
-<h2>Dalam</h2>
-<div class="count" id="kanan">0</div>
-<button onclick="tambahKanan()">+</button>
-</div>
+        <div class="box">
+            <div class="category-icon">🥫</div>
+            <h3>Logam</h3>
+            <div class="label">Rp 4.000 / kg</div>
+            <div class="weight"><span id="berat-logam">0</span> kg</div>
+            <button onclick="tambahSampah('logam', 1)">+ 1kg</button>
+        </div>
+    </div>
 
-</div>
+    <div class="summary">
+        <h2>Ringkasan Tabungan</h2>
+        <p>Total Berat: <strong><span id="total-berat">0</span> kg</strong></p>
+        <div class="total-saldo">Saldo: Rp <span id="total-harga">0</span></div>
+        <button class="reset" onclick="reset()">Reset Data</button>
+    </div>
 
-<br>
+    <script>
+        // Data harga per kg
+        const harga = {
+            plastik: 2000,
+            kertas: 1500,
+            logam: 4000
+        };
 
-<h2>Total: <span id="total">0</span></h2>
+        // State data
+        let data = {
+            plastik: 0,
+            kertas: 0,
+            logam: 0
+        };
 
-<button class="reset" onclick="reset()">RESET</button>
+        function tambahSampah(jenis, jumlah) {
+            data[jenis] += jumlah;
+            document.getElementById(`berat-${jenis}`).innerText = data[jenis];
+            updateTotal();
+        }
 
-<script>
-let kiri = 0;
-let kanan = 0;
+        function updateTotal() {
+            const totalBerat = data.plastik + data.kertas + data.logam;
+            const totalHarga = (data.plastik * harga.plastik) + 
+                               (data.kertas * harga.kertas) + 
+                               (data.logam * harga.logam);
 
-function tambahKiri(){
-    kiri++;
-    document.getElementById("kiri").innerText = kiri;
-    updateTotal();
-}
+            document.getElementById("total-berat").innerText = totalBerat;
+            document.getElementById("total-harga").innerText = totalHarga.toLocaleString('id-ID');
+        }
 
-function tambahKanan(){
-    kanan++;
-    document.getElementById("kanan").innerText = kanan;
-    updateTotal();
-}
-
-function updateTotal(){
-    document.getElementById("total").innerText = kiri + kanan;
-}
-
-function reset(){
-    kiri = 0;
-    kanan = 0;
-    document.getElementById("kiri").innerText = 0;
-    document.getElementById("kanan").innerText = 0;
-    updateTotal();
-}
-</script>
-
+        function reset() {
+            if(confirm("Apakah Anda yakin ingin menghapus semua catatan?")) {
+                data.plastik = 0;
+                data.kertas = 0;
+                data.logam = 0;
+                
+                document.getElementById("berat-plastik").innerText = 0;
+                document.getElementById("berat-kertas").innerText = 0;
+                document.getElementById("berat-logam").innerText = 0;
+                updateTotal();
+            }
+        }
+    </script>
 </body>
-  </html>
+</html>
